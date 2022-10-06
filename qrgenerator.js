@@ -4,9 +4,9 @@ const XLSX = require('xlsx')
 const ws = XLSX.readFile('tickets.xlsx').Sheets['Sheet1']
 const data = XLSX.utils.sheet_to_json(ws)
 
-const generateQR = (filename, data, options = {}) => {
+const generateQR = async (filename, data, options = {}) => {
   try {
-    QR.toFile(`exported_qr_codes/${filename}.png`, data.toString(), options)
+    await QR.toFile(`exported_qr_codes/${filename}.png`, data.toString(), options)
   } catch (error) {
     console.error(error)
   }
