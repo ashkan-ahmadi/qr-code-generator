@@ -1,3 +1,4 @@
+import fs from 'fs'
 import QR from 'qrcode'
 import XLSX from 'xlsx'
 
@@ -13,6 +14,12 @@ export const generateQR = (destinationFolderName, filename, data, options = {}) 
   const settings = { ...defaultOptions, ...options }
 
   try {
+    // create folder if it doesn't exist
+    if (!fs.existsSync(destinationFolderName)) {
+      fs.mkdirSync(destinationFolderName)
+      console.log(`Created directory: ${destinationFolderName}`)
+    }
+
     // data has to be in string format, otherwise, it throws an error
     QR.toFile(`${destinationFolderName}/${filename}.png`, data.toString(), settings)
   } catch (error) {
