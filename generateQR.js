@@ -1,7 +1,7 @@
 import QR from 'qrcode'
 import XLSX from 'xlsx'
 
-export const generateQR = (destination, filename, data, options = {}) => {
+export const generateQR = (destinationFolderName, filename, data, options = {}) => {
   const defaultOptions = {
     // see complete list with defaults: https://github.com/soldair/node-qrcode#qr-code-options
     width: 250, // image size in px
@@ -14,7 +14,7 @@ export const generateQR = (destination, filename, data, options = {}) => {
 
   try {
     // data has to be in string format, otherwise, it throws an error
-    QR.toFile(`${destination}/${filename}.png`, data.toString(), settings)
+    QR.toFile(`${destinationFolderName}/${filename}.png`, data.toString(), settings)
   } catch (error) {
     console.error(error)
   }
